@@ -1,5 +1,7 @@
 import useInput from '../../hooks/useInput';
+import { useNavigate } from 'react-router-dom';
 import { SignContainer } from '../SignIn/SignIn.styled';
+import { signup } from "../../services/signup";
 
 export default function SignUp() {
   const [email, setEmail, onChangeEmail, validatedByEmail] = useInput('', 'email');
@@ -7,11 +9,23 @@ export default function SignUp() {
 
   const isConfirmed = validatedByEmail && validatedByPassword;
 
+  const navigate = useNavigate();
+
   // 아래 함수에서 데이터 가져오는 작업
   // axios+post: auth/signup
   // 라우팅 처리
 
-  const handleSignUpSubmit = () => {};
+  const handleSignUpSubmit = () => {
+    signup(email, password)
+    .then((res) => {
+      if (res) {
+        alert("회원가입에 성공했습니다.")
+        navigate('/signin');
+      } else {
+        alert("이메일과 비밀번호를 확인해주세요.")
+      }
+    })
+  };
 
   return (
     <SignContainer>
