@@ -24,6 +24,10 @@ export const StyledTodoElement = styled.li`
     border-radius: 5px;
     color: white;
 
+    &:hover {
+      cursor: pointer;
+    }
+
     &:disabled {
       background-color: #e0e0e0;
     }
