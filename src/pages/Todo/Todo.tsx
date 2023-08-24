@@ -1,5 +1,7 @@
 import useInput from '../../hooks/useInput';
 import StyledTodoContainer from './Todo.styled';
+import {useState} from "react";
+import TodoList from "./TodoList";
 
 export type ITodo = {
   id: number;
@@ -11,8 +13,21 @@ export type ITodo = {
 export default function Todo() {
   const [modifiedTodo, , onChangeModifiedTodo] = useInput('', 'modifiedTodo');
   const [todo, setTodo, onChangeTodo] = useInput('', 'todo');
+  const [clickEnabled, setClickEnabled] = useState(true);
+  const todoDeleteHandler = async (todoId: number) => {
+    if (clickEnabled) {
+      const confirmDelete = window.confirm("정말 삭제하시겠습니까?");
+      if (confirmDelete) {
+        setClickEnabled(false);
+        //delete fetch
+        setClickEnabled(true);
+      }
+    }
+  }
 
-  const handleSubmitTodo = () => {};
+  const handleSubmitTodo = () => {
+
+  };
 
   return (
     <StyledTodoContainer>
@@ -34,27 +49,9 @@ export default function Todo() {
       </div>
 
       {/* ToDoList 구현 영역 */}
+      <TodoList
+        todoDeleteHandler={todoDeleteHandler}
+      />
     </StyledTodoContainer>
   );
-import TodoList from "./TodoList";
-import {useState} from "react";
-
-export default function Todo(){
-    const [clickEnabled, setClickEnabled] = useState(true);
-    const todoDeleteHandler = async (todoId : number) => {
-        if (clickEnabled){
-            const confirmDelete = window.confirm("정말 삭제하시겠습니까?");
-            if (confirmDelete){
-                setClickEnabled(false);
-                //delete fetch
-                setClickEnabled(true);
-            }
-        }
-    }
-
-    return (
-        <TodoList
-            todoDeleteHandler={todoDeleteHandler}
-        />
-    )
 }
