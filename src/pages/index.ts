@@ -1,4 +1,4 @@
-export { default as Home } from './Home/index'
-export { default as SignIn } from './SignIn/index'
-export { default as SignUp } from './SignUp/index'
-export { default as Todo } from './Todo/index'
+export { default as Home } from './Home/Home';
+export { default as SignIn } from './SignIn/SignIn';
+export { default as SignUp } from './SignUp/SignUp';
+export { default as Todo } from './Todo/Todo';
