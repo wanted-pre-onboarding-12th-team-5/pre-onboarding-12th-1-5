@@ -1,4 +1,4 @@
 {
-  "extends": ["react-app", "eslint:recommended", "prettier"],
-  "plugins": ["prettier"]
+  "plugins": ["prettier"],
+  "extends": ["react-app", "eslint:recommended", "prettier"]
 }
