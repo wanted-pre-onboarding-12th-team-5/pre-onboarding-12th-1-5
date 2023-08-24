@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Home, SignIn, SignUp, Todo } from './pages';
 
-//errorBoundary
 function App() {
   return (
     <Router>
