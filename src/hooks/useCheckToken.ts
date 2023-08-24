@@ -16,7 +16,7 @@ export function useCheckToken() {
     } else {
       const restrictedPaths = ["/todo"];
       if (restrictedPaths.includes(pathname)) {
-        navigate("/");
+        navigate("/signin");
       }
     }
   }, [pathname, navigate]);
