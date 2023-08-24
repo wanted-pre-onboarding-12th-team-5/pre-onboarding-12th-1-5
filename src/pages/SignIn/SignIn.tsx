@@ -1,16 +1,22 @@
+import { FormEvent } from 'react';
 import useInput from '../../hooks/useInput';
 import { SignContainer } from './SignIn.styled';
+import { useNavigate } from 'react-router-dom';
 
 export default function SignIn() {
   const [email, setEmail, onChangeEmail, validatedByEmail] = useInput('', 'email');
   const [password, setPassword, onChangePassword, validatedByPassword] = useInput('', 'password');
+  const navigate = useNavigate();
 
   const isConfirmed = validatedByEmail && validatedByPassword;
 
   // 아래 함수에서 데이터 가져오는 작업
-  // post: auth/signin
+  // axios+post: auth/signin
+  // 라우팅 처리
 
-  const handleSignInSubmit = () => {};
+  const handleSignInSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  };
 
   return (
     <SignContainer>

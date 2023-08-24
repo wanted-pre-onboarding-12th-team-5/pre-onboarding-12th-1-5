@@ -8,7 +8,8 @@ export default function SignUp() {
   const isConfirmed = validatedByEmail && validatedByPassword;
 
   // 아래 함수에서 데이터 가져오는 작업
-  // post: auth/signup
+  // axios+post: auth/signup
+  // 라우팅 처리
 
   const handleSignUpSubmit = () => {};
 
