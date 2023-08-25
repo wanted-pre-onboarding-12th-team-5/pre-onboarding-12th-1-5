@@ -30,3 +30,7 @@ export function updateTodo(id: number, todo: string, isCompleted: boolean) {
 export function deleteTodo(id: number) {
   return todoInstance.delete(`/todos/${id}`).then((res) => res.data);
 }
+
+export function signIn(email: string, password: string) {
+  return todoInstance.post('/auth/signin', { email, password });
+}
