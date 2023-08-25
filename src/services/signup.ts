@@ -8,13 +8,5 @@ const signUpInstance: AxiosInstance = axios.create({
   });
 
 export async function signup(email:string, password:string) {
-    try {
-        const response: AxiosResponse = await signUpInstance.post('/signup', { email, password });
-        if (response.status === 201) {
-            return true
-        }
-    } catch (error) {
-        console.error('Signup failed:', error);
-        return false;
-    }
+    return await signUpInstance.post('/auth/signup', { email, password });
 }

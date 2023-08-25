@@ -1,7 +1,9 @@
+import { FormEvent } from 'react';
 import useInput from '../../hooks/useInput';
 import { useNavigate } from 'react-router-dom';
 import { SignContainer } from '../SignIn/SignIn.styled';
 import { signup } from "../../services/signup";
+import { AxiosError } from 'axios';
 
 export default function SignUp() {
   const [email, setEmail, onChangeEmail, validatedByEmail] = useInput('', 'email');
@@ -15,16 +17,21 @@ export default function SignUp() {
   // axios+post: auth/signup
   // 라우팅 처리
 
-  const handleSignUpSubmit = () => {
-    signup(email, password)
-    .then((res) => {
-      if (res) {
+  const handleSignUpSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      const response = await signup(email, password)
+
+      if (response.status === 201) {
         alert("회원가입에 성공했습니다.")
         navigate('/signin');
       } else {
         alert("이메일과 비밀번호를 확인해주세요.")
       }
-    })
+    } catch (error) {
+      setEmail('');
+      setPassword('');
+    }
   };
 
   return (
