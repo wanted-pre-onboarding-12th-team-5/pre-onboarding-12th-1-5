@@ -1,22 +1,22 @@
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export function useCheckToken() {
   const navigate = useNavigate();
-  const pathname = window.location.pathname; 
+  const pathname = window.location.pathname;
 
   useEffect(() => {
-    const token = localStorage.getItem("access_token");
+    const token = localStorage.getItem('access_token');
 
     if (token) {
-      const allowedPaths = ["/signin", "/signup", "/"];
+      const allowedPaths = ['/signin', '/signup', '/'];
       if (allowedPaths.includes(pathname)) {
-        navigate("/todo");
+        navigate('/todo');
       }
     } else {
-      const restrictedPaths = ["/todo"];
+      const restrictedPaths = ['/todo'];
       if (restrictedPaths.includes(pathname)) {
-        navigate("/signin");
+        navigate('/signin');
       }
     }
   }, [pathname, navigate]);

@@ -1,1 +1,1 @@
-export { useCheckToken } from "./useCheckToken";
+export { useCheckToken } from './useCheckToken';
