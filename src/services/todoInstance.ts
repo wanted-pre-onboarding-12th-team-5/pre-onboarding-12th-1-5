@@ -3,7 +3,7 @@ import axios from 'axios';
 const todoInstance = axios.create({
   baseURL: 'https://www.pre-onboarding-selection-task.shop',
   headers: {
-    Authorization: `Bearer ${localStorage.getItem('token')}`,
+    Authorization: `Bearer ${localStorage.getItem('access_token')}`,
     'Content-Type': 'application/json',
   },
 });
