@@ -3,7 +3,7 @@ import axios from 'axios';
 const todoInstance = axios.create({
   baseURL: 'https://www.pre-onboarding-selection-task.shop',
   headers: {
-    Authorization: `Bearer ${localStorage.getItem('token')}`,
+    Authorization: `Bearer ${localStorage.getItem('access_token')}`,
     'Content-Type': 'application/json',
   },
 });
@@ -29,4 +29,8 @@ export function updateTodo(id: number, todo: string, isCompleted: boolean) {
 
 export function deleteTodo(id: number) {
   return todoInstance.delete(`/todos/${id}`).then((res) => res.data);
+}
+
+export function signIn(email: string, password: string) {
+  return todoInstance.post('/auth/signin', { email, password });
 }

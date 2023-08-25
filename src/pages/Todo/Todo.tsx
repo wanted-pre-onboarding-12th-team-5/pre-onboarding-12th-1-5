@@ -1,39 +1,29 @@
-import useInput from '../../hooks/useInput';
+import { useEffect, useState } from 'react';
+
+import { TodoType } from './todo.d';
+import { TodoElement } from './TodoElement';
+
 import StyledTodoContainer from './Todo.styled';
+import { AddTodoForm } from './AddTodoForm';
+import { getTodos } from '../../services/todoInstance';
 
-export type ITodo = {
-  id: number;
-  todo: string;
-  isCompleted: boolean;
-  userId: number;
-};
+export default function TodoPage() {
+  const [todoList, setTodoList] = useState<TodoType[]>([]);
 
-export default function Todo() {
-  const [modifiedTodo, , onChangeModifiedTodo] = useInput('', 'modifiedTodo');
-  const [todo, setTodo, onChangeTodo] = useInput('', 'todo');
-
-  const handleSubmitTodo = () => {};
+  useEffect(() => {
+    getTodos().then((res) => {
+      setTodoList(res);
+    });
+  }, []);
 
   return (
     <StyledTodoContainer>
-      <h1 className='todo__title'>투두리스트</h1>
-      <div className='todo__wrapper'>
-        <form className='todo__form' onSubmit={handleSubmitTodo}>
-          <input
-            className='todo__input--todo'
-            onChange={onChangeTodo}
-            data-testid='new-todo-input'
-            value={todo}
-            type='text'
-            placeholder='할 일을 입력하세요.'
-          />
-          <button className='todo__button--add' type='submit' data-testid='new-todo-add-button'>
-            추가
-          </button>
-        </form>
-      </div>
-
-      {/* ToDoList 구현 영역 */}
+      <AddTodoForm setTodoList={setTodoList} />
+      <ul className='todo-list'>
+        {todoList.map((todo) => (
+          <TodoElement key={todo.id} todo={todo} setTodoList={setTodoList} />
+        ))}
+      </ul>
     </StyledTodoContainer>
   );
 }

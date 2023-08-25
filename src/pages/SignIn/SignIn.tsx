@@ -2,6 +2,8 @@ import { FormEvent } from 'react';
 import useInput from '../../hooks/useInput';
 import { SignContainer } from './SignIn.styled';
 import { useNavigate } from 'react-router-dom';
+import { signIn } from '../../services/todoInstance';
+import { AxiosError } from 'axios';
 
 export default function SignIn() {
   const [email, setEmail, onChangeEmail, validatedByEmail] = useInput('', 'email');
@@ -16,6 +18,22 @@ export default function SignIn() {
 
   const handleSignInSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    try {
+      const response = await signIn(email, password);
+      console.log(response);
+      if (response.status === 200) {
+        alert('로그인에 성공했습니다. \n투두리스트 화면으로 이동합니다.');
+        localStorage.setItem('access_token', response.data.access_token);
+        navigate('/todo');
+      } else {
+        alert(response);
+      }
+    } catch (error) {
+      const axiosError = error as AxiosError;
+      console.log(axiosError.response?.data);
+      setEmail('');
+      setPassword('');
+    }
   };
 
   return (
