@@ -5,7 +5,7 @@ export type InputReturnTypes<T> = [
   T,
   Dispatch<SetStateAction<T>>,
   (e: ChangeEvent<HTMLInputElement>) => void,
-  boolean | undefined
+  boolean | undefined,
 ];
 
 export type InputTypes = 'email' | 'password' | 'modifiedTodo' | 'todo';
