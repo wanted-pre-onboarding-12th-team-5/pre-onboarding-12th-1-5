@@ -23,7 +23,8 @@
     "eject": "react-scripts eject",
     "prepare": "husky install",
     "format": "prettier --write .",
-    "lint": "eslint --quiet --fix ."
+    "lint": "eslint --quiet --fix .",
+    "deploy" : "npm run build && aws s3 sync build/ s3://preonboarding-frontend-12th-1-5 --delete"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
