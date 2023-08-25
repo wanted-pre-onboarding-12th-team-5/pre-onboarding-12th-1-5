@@ -1,22 +1,31 @@
-import TodoList from "./TodoList";
-import {useState} from "react";
+import {useEffect, useState} from 'react';
 
-export default function Todo(){
-    const [clickEnabled, setClickEnabled] = useState(true);
-    const todoDeleteHandler = async (todoId : number) => {
-        if (clickEnabled){
-            const confirmDelete = window.confirm("정말 삭제하시겠습니까?");
-            if (confirmDelete){
-                setClickEnabled(false);
-                //delete fetch
-                setClickEnabled(true);
-            }
-        }
-    }
+import {TodoType} from './todo.d';
+import {TodoElement} from './TodoElement';
 
-    return (
-        <TodoList
-            todoDeleteHandler={todoDeleteHandler}
-        />
-    )
+import StyledTodoContainer from './Todo.styled';
+import {AddTodoForm} from './AddTodoForm';
+import {getTodos} from "../../services/todoInstance";
+
+export default function TodoPage() {
+  const [todoList, setTodoList] = useState<TodoType[]>([]);
+
+  useEffect(() => {
+    /* 현재 Token값이 없어 무한 루프로 인한 주석처리
+    getTodos().then((res) => {ㅌ
+      setTodoList(res)
+    });
+     */
+  }, []);
+
+  return (
+    <StyledTodoContainer>
+      <AddTodoForm setTodoList={setTodoList}/>
+      <ul className='todo-list'>
+        {todoList.map((todo) => (
+          <TodoElement key={todo.id} todo={todo} setTodoList={setTodoList}/>
+        ))}
+      </ul>
+    </StyledTodoContainer>
+  );
 }
